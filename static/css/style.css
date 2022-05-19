@@ -1,0 +1,49 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: black;
+    color: white;
+    overflow: hidden;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#container{
+    display: flex;
+    height: 100vh;
+    border: 2px solid rgb(255, 255, 255);
+    /* align-items: center; */
+}
+#left{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh; 
+    justify-content: center;
+}
+
+#right{
+    flex: 1;
+    background-image:url('https://e-file.huawei.com/-/media/EBG/Images/SolutionV2/industry/education/banner-wap.jpg');
+    background-position:bottom;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh; 
+    justify-content: center;
+}
+#right h1{
+    color:white;
+}
+img{
+    padding-bottom: 3.3 rem;
+}
+
+#signup label{
+    width: 100%;
+    line-height: 1.3rem;
+}
+#signup input{
+    width: 100%;
+    line-height: 1.3rem;
+}

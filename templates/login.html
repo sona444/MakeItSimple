@@ -1,0 +1,62 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Advanced EMS{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}<style>
+#myChart2 div{
+  height:500px !important;
+}
+
+</style>{% endblock stylesheets %}
+
+{% block body_class %} landing-page {% endblock body_class %}
+
+{% block content %}
+
+<main>
+    <div class="" id="container">
+        <div id="left">
+            <div id="signup">
+                <div id="logo">
+                    <img src="" alt="nextZenEMS">
+                    <h1>Welcome Back!</h1>
+                </div>
+                <form>
+                    <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="email-input">
+                    </div>
+                    <div>
+                    <label for="Password">Password</label>
+                    <input type="password" name="password" class="password-input">
+                    </div>
+                    <button type="submit" class="primary-btn">Sign In</button>
+                    <div id="links">
+                    <a href="#">Forgot Password</a>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+        <div id="right">
+            <h1>New Here?</h1>
+            <form>
+                    <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="email-input">
+                    </div>
+                    <div>
+                    <label for="Password">Password</label>
+                    <input type="password" name="password" class="password-input">
+                    </div>
+                    <button type="submit" class="primary-btn">Sign In</button>
+                    <div id="links">
+                    <a href="#">Forgot Password</a>
+                    </div>
+                </form>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}
