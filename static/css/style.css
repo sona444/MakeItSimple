@@ -21,7 +21,7 @@ body{
     height: 100vh; 
     justify-content: center;
 }
-
+/* 
 #right{
     flex: 1;
     background-image:url('https://e-file.huawei.com/-/media/EBG/Images/SolutionV2/industry/education/banner-wap.jpg');
@@ -34,7 +34,7 @@ body{
 }
 #right h1{
     color:white;
-}
+} */
 img{
     padding-bottom: 3.3 rem;
 }
@@ -46,4 +46,29 @@ img{
 #signup input{
     width: 100%;
     line-height: 1.3rem;
+    border: 2px solid #121131;
+}
+#signup{
+    padding:50px;
+    border: 2px solid #121131;
+    border-radius: 9px;
+    color: #121131;
+    font-weight: 800;
+}
+#signup button{
+    background-color: #121131;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 0;
+    font-weight: 900;
+    margin-top: 10px;
+}
+#links{
+    text-align: right;
+}
+#links a{
+    color: #121131;
+    font-weight: 600;
+    text-decoration: none;
 }
