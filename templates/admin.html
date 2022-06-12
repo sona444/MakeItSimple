@@ -3,7 +3,22 @@
 {% block title %}Advanced EMS{% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}<style>
+nav{
+    background-color:#121131;
+    padding-left:40px;
+    padding-right:40px;
+}
+.navbar-expand-lg .navbar-collapse{
+  justify-content:flex-end !important;
+}
+.navbar-expand-lg .navbar-nav a{
+  color:white !important;
+}
+.navbar-expand-lg .navbar-nav a:hover{
+  color:white !important;
+}
+</style>{% endblock stylesheets %}
 
 {% block body_class %} landing-page {% endblock body_class %}
 
@@ -15,21 +30,34 @@
             <div id="signup">
                 <div id="logo">
                     
-                    <h1>Welcome Back!</h1>
+                    <h1>Create New Users!</h1>
                 </div>
                 <form>
                     <div>
-                    <label for="email">Username</label>
-                    <input type="email" name="email" class="email-input">
+                    <label for="role">Role</label>
+                    <select name="role" id="role">
+                        {% for i in roles %}
+                        <option value="{{i.name}}">{{i.name}}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                    <div>
+                    <label for="phone">Phone Number</label>
+                    <input type="phone" name="phone" class="phone-input" id="phone">
+                    </div>
+                    <div>
+                    <label for="name">Name</label>
+                    <input type="name" name="name" class="name-input" id="name">
+                    </div>
+                    <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class="email-input" id="email">
                     </div>
                     <div>
                     <label for="Password">Password</label>
-                    <input type="password" name="password" class="password-input">
+                    <input type="password" name="password" class="password-input" id="password">
                     </div>
-                    <div id="links">
-                    <a href="#">Forgot Password</a>
-                    </div>
-                    <button type="submit" class="primary-btn">Sign In</button>
+                    <button type="submit" class="primary-btn" id="btn-register">Generate User</button>
                     
                 </form>
             </div>
@@ -37,5 +65,45 @@
         </div>
     </div>
 </main>
+<script>
+$(document).on('click', '#btn-register', function(e){
+    e.preventDefault();
+    let role = $('#role').val();
+    let email = $('#email').val();
+    let password = $('#password').val();
+    let name = $('#name').val();
+    let phone = $('#phone').val();
+    jsondata={
+      "role":role,
+      "email":email,
+      "password":password,
+      "phone":phone,
+      "name":name,
+    }
+    // disabled the submit button
+    $("#btn-register").prop("disabled", true);
+    $.ajax({
+      type: "POST",
+      data: jsondata,
+      url:"/add-new-user",
+      dataType: "json",
+        complete: function(resp){
+          $("#btn-register").prop("disabled", false); 
+          if(resp.responseText=='true'){
+            if(members==1){
+              alert("User Details Saved");
+            }
+            else{
+              alert(resp.responseText);}
+            }
+          
+          else{
+            alert(resp.responseText)
+          }
+          // enabled the submit button
+        }
+      });
+});
+</script>
 
 {% endblock content %}

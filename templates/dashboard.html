@@ -1,0 +1,58 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Advanced EMS{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}<style>
+nav{
+    background-color:#121131;
+    padding-left:40px;
+    padding-right:40px;
+}
+.navbar-expand-lg .navbar-collapse{
+  justify-content:flex-end !important;
+}
+.navbar-expand-lg .navbar-nav a{
+  color:white !important;
+}
+.navbar-expand-lg .navbar-nav a:hover{
+  color:white !important;
+}
+</style>{% endblock stylesheets %}
+
+{% block body_class %} landing-page {% endblock body_class %}
+
+{% block content %}
+{% include 'includes/header-with-login.html' %}
+<main>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+        <a href=#><img src="{{url_for('static', filename='img/1.png')}}" width=250></a>
+        </div>
+        <div class="col-md-3">
+        <a href=#><img src="{{url_for('static', filename='img/2.png')}}" width=250></a>
+        </div>
+        <div class="col-md-3">
+        <a href=#><img src="{{url_for('static', filename='img/3.png')}}" width=250></a>
+        </div>
+        <div class="col-md-3">
+        <a href=#><img src="{{url_for('static', filename='img/4.png')}}" width=250></a>
+        </div>
+        <div class="col-md-3">
+        <a href=#><img src="{{url_for('static', filename='img/5.png')}}" width=250></a>
+        </div>
+        <div class="col-md-3">
+        <a href=#><img src="{{url_for('static', filename='img/6.png')}}" width=250></a>
+        </div>
+        <div class="col-md-3">
+        <a href=#><img src="{{url_for('static', filename='img/7.png')}}" width=250></a>
+        </div>
+        <div class="col-md-3">
+        <a href=#><img src="{{url_for('static', filename='img/8.png')}}" width=250></a>
+        </div>
+    </div>
+</div>
+</main>
+ 
+{% endblock content %}

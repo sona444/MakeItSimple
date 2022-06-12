@@ -4,10 +4,20 @@
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}<style>
-#myChart2 div{
-  height:500px !important;
+nav{
+    background-color:#121131;
+    padding-left:40px;
+    padding-right:40px;
 }
-
+.navbar-expand-lg .navbar-collapse{
+  justify-content:flex-end !important;
+}
+.navbar-expand-lg .navbar-nav a{
+  color:white !important;
+}
+.navbar-expand-lg .navbar-nav a:hover{
+  color:white !important;
+}
 </style>{% endblock stylesheets %}
 
 {% block body_class %} landing-page {% endblock body_class %}
@@ -15,6 +25,7 @@
 {% block content %}
 {% include 'includes/header-with-login.html' %}
 <main>
+
 </main>
  
 {% endblock content %}

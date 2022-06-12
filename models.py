@@ -1,18 +1,20 @@
+from sqlalchemy import ForeignKey
 from app import db
 
 class User(db.Model):   
     __tablename__ = 'users'
     id=db.Column(db.Integer,primary_key=True)
     name=db.Column(db.String,nullable=False)
-    password_hash = db.Column(db.String(length=100), nullable=True)
-    email = db.Column(db.String(50), nullable=True) 
-    roles = db.relationship('Role', secondary='user_roles')   
-                                                                                               
-    def __init__(self, name, password_hash,email, roles):        
+    password_hash = db.Column(db.String(100), nullable=True)
+    email = db.Column(db.String(100), nullable=True) 
+    phone=db.Column(db.String(50),nullable=False)
+
+    def __init__(self, name, password_hash,email, roles, phone):        
         self.name=name
-        self.password_hash=password_hash
+        self.password_hash=password_hash 
         self.email=email
         self.roles=roles
+        self.phone=phone
 
 
 class Role(db.Model):
@@ -23,7 +25,6 @@ class Role(db.Model):
     def __init__(self, name):        
         self.name=name
 
-# Define the UserRoles association table
 class UserRoles(db.Model):
     __tablename__ = 'user_roles'
     id = db.Column(db.Integer(), primary_key=True)
