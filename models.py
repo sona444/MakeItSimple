@@ -8,6 +8,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(100), nullable=True)
     email = db.Column(db.String(100), nullable=True) 
     phone=db.Column(db.String(50),nullable=False)
+    roles=db.Column(db.String(50),nullable=False)
 
     def __init__(self, name, password_hash,email, roles, phone):        
         self.name=name

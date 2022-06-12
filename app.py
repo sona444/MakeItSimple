@@ -44,8 +44,10 @@ def signup():
                     print(userId)
                     if role=='teacher':
                         db.session.add(UserRoles(user_id=userId.id, role_id=2))
-                    else:
+                    elif role=='student':
                         db.session.add(UserRoles(user_id=userId.id, role_id=1))
+                    elif role=='admin':
+                        db.session.add(UserRoles(user_id=userId.id, role_id=3))
                     db.session.commit()
         else:
             return("Please fill all the fields")
