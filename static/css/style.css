@@ -4,7 +4,6 @@
 body{
     background-color: black;
     color: white;
-    overflow: hidden;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 #container{
@@ -93,4 +92,32 @@ img{
     color: #121131;
     font-weight: 600;
     text-decoration: none;
+}
+.course-add-container, .course-register-container{
+    text-align:center;
+}
+.course-add-container form, .course-register-container form, .userroles-details{
+    margin-top:30px;
+    border:4px solid #121131;
+    padding:50px 0px;
+}
+.course-add-container form label, .course-register-container form label{
+    font-weight:700;
+}
+.course-add-container form input,.course-add-container form select option, .course-add-container form select, .course-register-container form select option, .course-register-container form select{
+    border:2px solid #121131;
+    background-color:white;
+    color:#121131;
+    border-radius: 10px;
+}
+.course-add-container form div, .course-register-container form div{
+    padding:10px;    
+}
+.course-add-container button, .course-register-container button{
+    background-color:#121131;
+    color:white;
+    border:0;
+    padding:20px;
+    font-weight: 700;
+    border-radius:20px;
 }

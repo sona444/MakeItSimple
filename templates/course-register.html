@@ -1,0 +1,219 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Advanced EMS{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}<style>
+nav{
+    background-color:#121131;
+    padding-left:60px;
+    padding-right:60px;
+}
+.navbar-expand-lg .navbar-collapse{
+  justify-content:flex-end !important;
+}
+.navbar-expand-lg .navbar-nav a{
+  color:white !important;
+  font-size:21px;
+}
+.navbar-expand-lg .navbar-nav a:hover{
+  color:white !important;
+}
+</style>{% endblock stylesheets %}
+
+{% block body_class %} landing-page {% endblock body_class %}
+
+{% block content %}
+{% include 'includes/header-with-login.html' %}
+<main>
+    <div class="container course-register-container">
+    <div class="tagging">
+        <form><div>
+                <label for="role">Role</label>
+                <select name="role" id="role">
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+
+            </div>
+            <div class="faculty">
+                <label for="faculty">Select the Faculty</label>
+                <select name="faculty" id="faculty">
+                {% for i in users %}
+                  {% if i.roles=='teacher' %}
+                    <option value="{{i.name}}">{{i.name}}</option>
+                  {% endif %}
+                {% endfor %}
+                </select>
+
+            </div>
+            <div class="student">
+                <label for="student">Select the Student</label>
+                <select name="student" id="student">
+                {% for i in users %}
+                  {% if i.roles=='student' %}
+                    <option value="{{i.name}}">{{i.name}}</option>
+                  {% endif %}
+                {% endfor %}
+                </select>
+
+            </div>
+            <div>
+            <div class="course">
+                <label for="course">Select the Course to assign</label>
+                <select name="course" id="course">
+                {% for i in courses %}
+                    <option value="{{i.name}}">{{i.name}}</option>
+                {% endfor %}
+                </select>
+
+            </div>
+            <div style="width:100%; text-align:center;">
+            <button type="submit" class="primary-btn" id="btn-register">Tag subject</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    
+        <div class="userroles-details">
+        <h4>Check assigned roles!</h4>
+        <form style="border:0;"> 
+          <div>
+                <label for="role">Role</label>
+                <select name="role" id="role2">
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+
+            </div>
+            <div class="faculty2">
+                <label for="faculty">Select the Faculty</label>
+                <select name="faculty" id="faculty2">
+                {% for i in users %}
+                  {% if i.roles=='teacher' %}
+                    <option value="{{i.name}}">{{i.name}}</option>
+                  {% endif %}
+                {% endfor %}
+                </select>
+
+            </div>
+            <div class="student2">
+                <label for="student">Select the Student</label>
+                <select name="student" id="student2">
+                {% for i in users %}
+                  {% if i.roles=='student' %}
+                    <option value="{{i.name}}">{{i.name}}</option>
+                  {% endif %}
+                {% endfor %}
+                </select>
+
+            </div>
+            <div style="width:100%; text-align:center;">
+            <button type="submit" class="primary-btn" id="btn-details">Get Registered Courses</button>
+            </div>
+            </form>
+            <div class="usercoursses">
+            </div>
+            </div>
+</main>
+<script>
+$(document).ready(function(){
+    $('.student').css("display", "none");
+    $('.student2').css("display", "none");
+
+    $('#role').change(function(e){
+      if ($('#role').val()=='teacher'){
+          $('.faculty').css("display", "block");
+          $('.student').css("display", "none");
+      }
+  });
+  $('#role2').change(function(e){
+      if ($('#role2').val()=='teacher'){
+          $('.faculty2').css("display", "block");
+          $('.student2').css("display", "none");
+      }
+  });
+  $('#role').change(function(e){
+      if ($('#role').val()=='student'){
+          $('.student').css("display", "block");
+          $('.faculty').css("display", "none");
+      }
+  });
+  $('#role2').change(function(e){
+      if ($('#role2').val()=='student'){
+          $('.student2').css("display", "block");
+          $('.faculty2').css("display", "none");
+      }
+  });
+});
+$(document).on('click', '#btn-register', function(e){
+    e.preventDefault();
+    let role = $('#role').val();
+    let faculty = $('#faculty').val();
+    let student = $('#student').val();
+    let course = $('#course').val();
+    jsondata={
+      "role":role,
+      "faculty":faculty,
+      "student":student,
+      "course":course
+    }
+    
+    // disabled the submit button
+    $("#btn-register").prop("disabled", true);
+    $.ajax({
+      type: "POST",
+      data: jsondata,
+      url:"/tag-course",
+      dataType: "json",
+        complete: function(resp){
+          $("#btn-register").prop("disabled", false); 
+            alert(resp.responseText);
+          }
+          // enabled the submit button
+        
+      });
+});
+$(document).on('click', '#btn-details', function(e){
+    e.preventDefault();
+    let role = $('#role2').val();
+    console.log(role);
+    if (role == 'teacher'){
+    var user = $('#faculty2').val();
+      console.log(user);
+    }
+    else{
+    let user = $('#student2').val();
+    }
+      console.log(user);
+    jsondata={
+      "role":role,
+      "user":user,
+    }
+    
+    // disabled the submit button
+    $("#btn-details").prop("disabled", true);
+    $.ajax({
+      type: "POST",
+      data: jsondata,
+      url:"/get-user-roles",
+      dataType: "json",
+        complete: function(resp){
+          $("#btn-details").prop("disabled", false); 
+          const myObj = JSON.parse(resp.responseText);
+          var code='<p>'
+          $.each(myObj.courses, function(index, value) {
+            console.log(value);
+            code=code+value;
+            code=code+'<br>';
+          });
+          code=code+'</p>';
+            $('.usercoursses').html(code);
+          console.log(myObj.courses);
+          }
+          // enabled the submit button
+        
+      });
+});
+</script>
+{% endblock content %}

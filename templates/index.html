@@ -4,6 +4,11 @@
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}<style>
+#email, #password{
+    border:2px solid white !important;
+    background:#121131 !important;
+    color:white !important;
+}
 nav{
     background-color:#121131;
     padding-left:40px;
@@ -23,9 +28,70 @@ nav{
 {% block body_class %} landing-page {% endblock body_class %}
 
 {% block content %}
-{% include 'includes/header-with-login.html' %}
-<main>
-
+<main >
+    <div class="" id="container">
+    <div id="left"style="color:white; font-weight:700; background-image:url({{url_for('static', filename='img/desktop_bg.png')}}); background-size:cover; background-position:center;">
+        <img src="{{url_for('static', filename='img/white-logo2.png')}}" id="login-logo">
+        <h3>Powering student-centric education in universities & colleges</h3>
+        <p>We help universities and colleges of all sizes and streams run better – from admissions to academics, back office to accreditations, desktop to mobiles – We empower students, faculty and management to collaborate efficiently and use insights effectively, benchmarking quality education while creating personalized learning experience.</p>
+    </div>
+        <div id="right">
+            <div id="signup" style="color:white !important;">
+                <div id="logo">
+                    <img src="https://s3.ap-south-1.amazonaws.com/corecampus/images/mru.jpg">
+                    <h1>Welcome Back!</h1>
+                </div>
+                <form>
+                    <div>
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="email-input">
+                    </div>
+                    <div>
+                    <label for="Password">Password</label>
+                    <input type="password" name="password" id="password" class="password-input">
+                    </div>
+                    <div id="links">
+                    <a href="#" id="forget" style="color:white !important;">Forgot Password</a>
+                    </div>
+                    <div style="width:100%; text-align:center;">
+                    <button type="submit" class="primary-btn" id="btn-register" style="background-color:white; color:#121131;">Sign In</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
 </main>
- 
+<script>
+$(document).on('click', '#btn-register', function(e){
+    e.preventDefault();
+    let email = $('#email').val();
+    let password = $('#password').val();
+    jsondata={
+      "email":email,
+      "password":password
+    }
+    
+    // disabled the submit button
+    $("#btn-register").prop("disabled", true);
+    $.ajax({
+      type: "POST",
+      data: jsondata,
+      url:"/login-a-user",
+      dataType: "json",
+        complete: function(resp){
+          $("#btn-register").prop("disabled", false); 
+          if (resp.responseText=="invalid Password, Please Recheck!" || resp.responseText=="Email Address not registered contact your ERP Admin."){
+            alert(resp.responseText);
+          }
+            else{
+                let urll="http://127.0.0.1:5000/dashboard/"+resp.responseText;
+                window.location.href = urll;
+            }
+          }
+          // enabled the submit button
+        
+      });
+});
+</script>
 {% endblock content %}

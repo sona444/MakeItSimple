@@ -69,6 +69,9 @@ nav{
         <a href=#><img src="{{url_for('static', filename='img/results.png')}}" width=250></a>
         </div>
         <div class="col-md-3">
+        <a href=#><img src="{{url_for('static', filename='img/courses.png')}}" width=250></a>
+        </div>
+        <div class="col-md-3">
         <a href=#><img src="{{url_for('static', filename='img/teacher-doubts.png')}}" width=250></a>
         </div>
         <div class="col-md-3">
@@ -81,9 +84,13 @@ nav{
         {% if user.roles == 'admin' %}
         <div class="col-md-3">
         <a href=#><img src="{{url_for('static', filename='img/add-tt.png')}}" width=250></a>
+        </div> <div class="col-md-3">
+        <a href='/new-course'><img src="{{url_for('static', filename='img/course-add.png')}}" width=250></a>
+        </div> <div class="col-md-3">
+        <a href=/register-courses><img src="{{url_for('static', filename='img/course-reg.png')}}" width=250></a>
         </div>
         <div class="col-md-3">
-        <a href=#><img src="{{url_for('static', filename='img/add-users.png')}}" width=250></a>
+        <a href=/add-users><img src="{{url_for('static', filename='img/add-users.png')}}" width=250></a>
         </div>
         <div class="col-md-3">
         <a href=#><img src="{{url_for('static', filename='img/add-holidays.png')}}" width=250></a>

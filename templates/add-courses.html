@@ -1,0 +1,81 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Advanced EMS{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}<style>
+nav{
+    background-color:#121131;
+    padding-left:60px;
+    padding-right:60px;
+}
+.navbar-expand-lg .navbar-collapse{
+  justify-content:flex-end !important;
+}
+.navbar-expand-lg .navbar-nav a{
+  color:white !important;
+  font-size:21px;
+}
+.navbar-expand-lg .navbar-nav a:hover{
+  color:white !important;
+}
+</style>{% endblock stylesheets %}
+
+{% block body_class %} landing-page {% endblock body_class %}
+
+{% block content %}
+{% include 'includes/header-with-login.html' %}
+<main>
+    <div class="container course-add-container">
+        <form>
+            <div>
+            <label for="name">Course Name</label>
+            <input type="text" name="course-name" id="course-name" class="course-name">
+            </div>
+            <div>
+            <label for="credits">Course Credits</label>
+            <input type="text" name="credits" id="credits" class="credits">
+            </div>
+            <div>
+                <label for="type">Course Type</label>
+                <select name="type" id="type">
+                    <option value="Theory">Theory</option>
+                    <option value="Practical">Practical</option>
+                    <option value="Theory">Tutorial</option>
+                </select>
+            </div>
+            <div style="width:100%; text-align:center;">
+            <button type="submit" class="primary-btn" id="btn-add" >Add new</button>
+            </div>
+        </form>
+    </div>
+</main>
+<script>
+$(document).on('click', '#btn-add', function(e){
+    e.preventDefault();
+    let courseName = $('#course-name').val();
+    let credits = $('#credits').val();
+    let type = $('#type').val();
+    jsondata={
+      "course-name":courseName,
+      "credits":credits,
+      "type":type,
+    }
+    
+    // disabled the submit button
+    $("#btn-add").prop("disabled", true);
+    $.ajax({
+      type: "POST",
+      data: jsondata,
+      url:"/add-new-course",
+      dataType: "json",
+        complete: function(resp){
+          $("#btn-add").prop("disabled", false); 
+          alert(resp.responseText);
+            }
+          // enabled the submit button
+        
+      });
+});
+</script>
+{% endblock content %}
