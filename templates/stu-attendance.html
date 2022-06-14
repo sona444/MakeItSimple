@@ -1,0 +1,418 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Advanced EMS{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}<style>
+nav{
+    background-color:#121131;
+    padding-left:60px;
+    padding-right:60px;
+}
+.navbar-expand-lg .navbar-collapse{
+  justify-content:flex-end !important;
+}
+.navbar-expand-lg .navbar-nav a{
+  color:white !important;
+  font-size:21px;
+}
+.navbar-expand-lg .navbar-nav a:hover{
+  color:white !important;
+}
+</style>{% endblock stylesheets %}
+
+{% block body_class %} landing-page {% endblock body_class %}
+
+{% block content %}
+{% include 'includes/header-with-login.html' %}
+<main>
+    <div class="preview">
+    <h3>Timetable</h3>
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr>
+                <td>8:00-9:00</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Monday' %}
+                        {% if i.time=='8:00-9:00' %}
+                            {{i.course_name}}         
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Monday' name="day" class='hidden-day'>
+                            <input type=hidden value='8:00-9:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                            </form>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+                </td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Tuesday' %}
+                        {% if i.time=='8:00-9:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Tuesday' name="day" class='hidden-day'>
+                            <input type=hidden value='8:00-9:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Wednesday' %}
+                        {% if i.time=='8:00-9:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Wednesday' name="day" class='hidden-day'>
+                            <input type=hidden value='8:00-9:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Thursday' %}
+                        {% if i.time=='8:00-9:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Thursday' name="day" class='hidden-day'>
+                            <input type=hidden value='8:00-9:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Friday' %}
+                        {% if i.time=='8:00-9:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Friday' name="day" class='hidden-day'>
+                            <input type=hidden value='8:00-9:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+            </tr>
+            <tr>
+                <td>9:00-10:00</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Monday' %}
+                        {% if i.time=='9:00-10:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Monday' name="day" class='hidden-day'>
+                            <input type=hidden value='9:00-10:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Tuesday' %}
+                        {% if i.time=='9:00-10:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Tuesday' name="day" class='hidden-day'>
+                            <input type=hidden value='9:00-10:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Wednesday' %}
+                        {% if i.time=='9:00-10:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Wednesday' name="day" class='hidden-day'>
+                            <input type=hidden value='9:00-10:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Thursday' %}
+                        {% if i.time=='9:00-10:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Thursday' name="day" class='hidden-day'>
+                            <input type=hidden value='9:00-10:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Friday' %}
+                        {% if i.time=='9:00-10:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Friday' name="day" class='hidden-day'>
+                            <input type=hidden value='9:00-10:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+            </tr>
+            <tr>
+                <td>10:00-11:00</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Monday' %}
+                        {% if i.time=='10:00-11:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Monday' name="day" class='hidden-day'>
+                            <input type=hidden value='10:00-11:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Tuesday' %}
+                        {% if i.time=='10:00-11:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Tuesday' name="day" class='hidden-day'>
+                            <input type=hidden value='10:00-11:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Wednesday' %}
+                        {% if i.time=='10:00-11:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Wednesday' name="day" class='hidden-day'>
+                            <input type=hidden value='10:00-11:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Thursday' %}
+                        {% if i.time=='10:00-11:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Thursday' name="day" class='hidden-day'>
+                            <input type=hidden value='10:00-11:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Friday' %}
+                        {% if i.time=='10:00-11:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Friday' name="day" class='hidden-day'>
+                            <input type=hidden value='10:00-11:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+            </tr>
+            <tr>
+                <td>11:00-12:00</td>
+                <td>Break</td>
+                <td>Break</td>
+                <td>Break</td>
+                <td>Break</td>
+                <td>Break</td>
+            </tr>
+            <tr>
+                <td>12:00-13:00</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Monday' %}
+                        {% if i.time=='12:00-13:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Monday' name="day" class='hidden-day'>
+                            <input type=hidden value='12:00-13:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Tuesday' %}
+                        {% if i.time=='12:00-13:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Tuesday' name="day" class='hidden-day'>
+                            <input type=hidden value='12:00-13:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Wednesday' %}
+                        {% if i.time=='12:00-13:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Wednesday' name="day" class='hidden-day'>
+                            <input type=hidden value='12:00-13:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Thursday' %}
+                        {% if i.time=='12:00-13:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Thursday' name="day" class='hidden-day'>
+                            <input type=hidden value='12:00-13:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Friday' %}
+                        {% if i.time=='12:00-13:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Friday' name="day" class='hidden-day'>
+                            <input type=hidden value='12:00-13:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+            </tr>
+            <tr>
+                <td>13:00-14:00</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Monday' %}
+                        {% if i.time=='13:00-14:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Monday' name="day" class='hidden-day'>
+                            <input type=hidden value='13:00-14:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Tuesday' %}
+                        {% if i.time=='13:00-14:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Tuesday' name="day" class='hidden-day'>
+                            <input type=hidden value='13:00-14:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Wednesday' %}
+                        {% if i.time=='13:00-14:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Wednesday' name="day" class='hidden-day'>
+                            <input type=hidden value='13:00-14:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Thursday' %}
+                        {% if i.time=='13:00-14:00' %}
+                           {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Thursday' name="day" class='hidden-day'>
+                            <input type=hidden value='13:00-14:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Friday' %}
+                        {% if i.time=='13:00-14:00' %}
+                            {{i.course_name}}
+                            <form method="POST" action="/verify-otp">
+                            <input type=hidden value='Friday' name="day" class='hidden-day'>
+                            <input type=hidden value='13:00-14:00' name='time' class='hidden-time'>
+                            <input type=hidden value='{{i.course_name}}' name='course-name' class='hidden-name'>
+                            <input type=hidden value='{{id}}' name='id'>
+                            <input type=number name='otp'>
+                            <button type="submit" class="otp"> Submit OTP </button>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+            </tr>
+        </table>
+    </div>
+</main>
+{% endblock content %}

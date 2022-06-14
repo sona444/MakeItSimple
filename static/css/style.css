@@ -59,7 +59,14 @@ body{
 img{
     padding-bottom: 3.3 rem;
 }
-
+.otp{
+    background-color:#121131;
+    color:white;
+    border:0;
+    border-radius:10px;
+    padding:5px;
+    margin-top:10px;
+}
 #signup label{
     width: 100%;
     line-height: 1.3rem;
@@ -120,4 +127,15 @@ img{
     padding:20px;
     font-weight: 700;
     border-radius:20px;
+}
+.preview{
+    text-align:center;
+}
+.preview table{
+    border:1px solid #121131;
+    width:100%;
+}
+.preview tr,.preview th,.preview td{
+    padding:10px;
+    border:1px solid #121131;
 }

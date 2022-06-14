@@ -41,6 +41,10 @@ nav{
                         {% endfor %}
                     </select>
                     </div>
+                    <div class="roll">
+                    <label for="roll">Roll Number</label>
+                    <input type="text" name="roll" class="roll" id="roll">
+                    </div>
                     <div>
                     <label for="phone">Phone Number</label>
                     <input type="phone" name="phone" class="phone-input" id="phone">
@@ -73,12 +77,15 @@ $(document).on('click', '#btn-register', function(e){
     let password = $('#password').val();
     let name = $('#name').val();
     let phone = $('#phone').val();
+    let roll_no=$('#roll').val();
+    console.log(roll_no);
     jsondata={
       "role":role,
       "email":email,
       "password":password,
       "phone":phone,
       "name":name,
+      "roll":roll_no,
     }
     // disabled the submit button
     $("#btn-register").prop("disabled", true);

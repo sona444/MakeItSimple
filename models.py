@@ -11,12 +11,13 @@ class User(db.Model):
     roles=db.Column(db.String(50),nullable=False)
     roll_no=db.Column(db.String(50),nullable=True)
 
-    def __init__(self, name, password_hash,email, roles, phone):        
+    def __init__(self, name, password_hash,email, roles, phone, roll_no):        
         self.name=name
         self.password_hash=password_hash 
         self.email=email
         self.roles=roles
         self.phone=phone
+        self.roll_no=roll_no
 
 
 class Role(db.Model):
@@ -44,7 +45,7 @@ class Attendance(db.Model):
     student_name = db.Column(db.String,nullable=False)
     date =db.Column(db.DateTime)
     course_id=db.Column(db.Integer(), db.ForeignKey('courses.id', ondelete='CASCADE'))
-    course_name=db.Column(db.String(20),nullable=False)
+    course_name=db.Column(db.String(50),nullable=False)
 
     def __init__(self, user_id, student_name, date, course_id, course_name):        
         self.user_id=user_id
@@ -69,9 +70,9 @@ class Timetable(db.Model):
     __tablename__ = 'timetable'
     id=db.Column(db.Integer(), primary_key=True)
     day=db.Column(db.String(20),nullable=False)
-    time=db.Column(db.Time, nullable=False)
+    time=db.Column(db.String(50), nullable=False)
     course_id=db.Column(db.Integer(), db.ForeignKey('courses.id', ondelete='CASCADE'))
-    course_name=db.Column(db.String(20),nullable=False)
+    course_name=db.Column(db.String(50),nullable=False)
 
     def __init__(self, day, time, course_id, course_name):
         self.day=day
@@ -88,3 +89,17 @@ class UserCourses(db.Model):
     def __init__(self, user_id, course_id):        
         self.user_id=user_id
         self.course_id=course_id
+
+class AttendanceOtp(db.Model):
+    __tablename__='attendance-otp'
+    id=db.Column(db.Integer(), primary_key=True, nullable=True)
+    day=db.Column(db.String(20),nullable=False)
+    time=db.Column(db.String(50), nullable=False)
+    course_name=db.Column(db.String(50),nullable=False)
+    otp=db.Column(db.Integer(), primary_key=True)
+
+    def __init__(self, day, time, otp, course_name):
+        self.day=day
+        self.time=time
+        self.course_name=course_name
+        self.otp=otp

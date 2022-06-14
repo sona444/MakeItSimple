@@ -31,13 +31,16 @@ nav{
     <div class="row">
         {% if user.roles == 'student' %}
         <div class="col-md-3">
-        <a href=#><img src="{{url_for('static', filename='img/time-table.png')}}" width=250></a>
+        <a href=/timetable><img src="{{url_for('static', filename='img/time-table.png')}}" width=250></a>
         </div>
         <div class="col-md-3">
         <a href=#><img src="{{url_for('static', filename='img/holidays.png')}}" width=250></a>
         </div>
         <div class="col-md-3">
-        <a href=#><img src="{{url_for('static', filename='img/attendance.png')}}" width=250></a>
+        <a href=/attendance-marker/{{user.email}}><img src="{{url_for('static', filename='img/mark-attendance.png')}}" width=250></a>
+        </div>
+        <div class="col-md-3">
+        <a href=/attendance-marker/{{user.email}}><img src="{{url_for('static', filename='img/view-attendance.png')}}" width=250></a>
         </div>
         <div class="col-md-3">
         <a href=#><img src="{{url_for('static', filename='img/results.png')}}" width=250></a>
@@ -57,13 +60,13 @@ nav{
         {% endif %}
         {% if user.roles == 'teacher' %}
         <div class="col-md-3">
-        <a href=#><img src="{{url_for('static', filename='img/time-table.png')}}" width=250></a>
+        <a href=/timetable><img src="{{url_for('static', filename='img/time-table.png')}}" width=250></a>
         </div>
         <div class="col-md-3">
         <a href=#><img src="{{url_for('static', filename='img/holidays.png')}}" width=250></a>
         </div>
         <div class="col-md-3">
-        <a href=#><img src="{{url_for('static', filename='img/attendance.png')}}" width=250></a>
+        <a href=/attendance-generator><img src="{{url_for('static', filename='img/attendance.png')}}" width=250></a>
         </div>
         <div class="col-md-3">
         <a href=#><img src="{{url_for('static', filename='img/results.png')}}" width=250></a>
@@ -83,7 +86,7 @@ nav{
         {% endif %}
         {% if user.roles == 'admin' %}
         <div class="col-md-3">
-        <a href=#><img src="{{url_for('static', filename='img/add-tt.png')}}" width=250></a>
+        <a href=/timetable-add><img src="{{url_for('static', filename='img/add-tt.png')}}" width=250></a>
         </div> <div class="col-md-3">
         <a href='/new-course'><img src="{{url_for('static', filename='img/course-add.png')}}" width=250></a>
         </div> <div class="col-md-3">

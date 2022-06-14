@@ -1,8 +1,12 @@
+from datetime import date, datetime
+from time import time
 from flask import Flask, jsonify, render_template, request
 from dotenv import load_dotenv
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 import hashlib
+from random import randint, randrange
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI']="postgresql://sonakshi:sonakshi@localhost/gems"
@@ -34,11 +38,16 @@ def signup():
         password=request.form.get('password')
         phone=request.form.get("phone")
         name=request.form.get("name")
+        if role=='student':
+            roll=request.form.get('roll')
         email_hash=hashlib.sha256(email.encode('utf-8')).hexdigest()
         hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
         print(hashed_password)
         if role and email and password and phone and name:
-                    db.session.add(User(name=name,  roles=role, phone=phone, email=email_hash, password_hash=hashed_password))
+                    if role=='student':
+                         db.session.add(User(name=name,  roles=role, phone=phone, email=email_hash, password_hash=hashed_password, roll_no=roll))
+                    else:
+                        db.session.add(User(name=name,  roles=role, phone=phone, email=email_hash, password_hash=hashed_password))
                     db.session.commit()
                     userId=User.query.filter(User.name==name).first()
                     print(userId)
@@ -137,6 +146,80 @@ def coursestag():
         else:
             return("Please fill all the fields")
         return ("Course has been tagged to the specified user!")
+
+@app.route("/attendance-generator", methods=['GET', 'POST'])
+def markAttendanceTeacher():
+    timetable=Timetable.query.all()
+    return render_template('teacher-attendance.html', timetable=timetable)
+
+@app.route("/attendance-marker/<email>", methods=['GET', 'POST'])
+def markAttendance(email):
+    timetable=Timetable.query.all()
+    user=User.query.filter(User.email==email).first()
+    return render_template('stu-attendance.html', id=user.id, timetable=timetable)
+
+@app.route("/timetable-add", methods=['GET', 'POST'])
+def timetable():
+    courses=Courses.query.all()
+    timetable=Timetable.query.all()
+    return render_template('add-timetable.html', courses=courses, timetable=timetable)
+
+@app.route("/post-timetable", methods=['GET', 'POST'])
+def posttimetable():
+    subject=request.form.get('subject')
+    day=request.form.get('day')
+    time=request.form.get('time')
+    if subject and day and time:
+        course=Courses.query.filter(Courses.name==subject).first()
+    db.session.add(Timetable(day=day, time=time, course_id=course.id,course_name=subject))
+    db.session.commit()
+    return "Schedule added successfully!"
+
+@app.route("/timetable", methods=['GET'])
+def timetableshow():
+    timetable=Timetable.query.all()
+    return render_template('timetable-show.html',timetable=timetable)
+
+@app.route("/generate-otp", methods=['GET','POST'])
+def getotp():
+    day=request.form.get('day')
+    time=request.form.get('time')
+    subject=request.form.get('course-name')
+    otp=randint(1000, 9999)  
+    otp_check=AttendanceOtp.query.filter(AttendanceOtp.day==day, AttendanceOtp.time==time, AttendanceOtp.course_name==subject).first()
+    if otp_check:
+        change=AttendanceOtp.query.filter(AttendanceOtp.day==day, AttendanceOtp.time==time, AttendanceOtp.course_name==subject).update(dict(otp=otp))
+    else:
+        db.session.add(AttendanceOtp(day=day, time=time, course_name=subject,otp=otp))
+    db.session.commit()
+    return '<script>window.location.href ="http://127.0.0.1:5000/attendance-generator";alert('+str(otp)+');</script>'
+
+@app.route("/verify-otp", methods=['GET','POST'])
+def verifyotp():
+    day=request.form.get('day')
+    time=request.form.get('time')
+    subject=request.form.get('course-name')
+    otp=request.form.get('otp')  
+    userid=request.form.get('id')  
+    username=User.query.filter(User.id==userid).first()
+    course=Courses.query.filter(Courses.name==subject).first()
+    today=date.today()
+    check_day={'Monday':1,'Tuesday':2,'Wednesday':3,'Thursday':4,'Friday':5}
+    day_today=datetime.today().weekday()
+    if check_day[day]==day_today:
+        otp_check=AttendanceOtp.query.filter(AttendanceOtp.day==day, AttendanceOtp.time==time, AttendanceOtp.course_name==subject).first()
+        if otp_check.otp==int(otp):
+            db.session.add(Attendance(user_id=userid, student_name=username.name,date=today, course_id=course.id, course_name=subject))
+            db.session.commit()
+        else:
+            return '<script>window.location.href ="http://127.0.0.1:5000/dashboard/'+username.email+'";alert("Wrong OTP!");</script>'
+        return '<script>window.location.href ="http://127.0.0.1:5000/dashboard/'+username.email+'";alert("Attendance marked Successfully!");</script>'
+    else:
+        return '<script>window.location.href ="http://127.0.0.1:5000/dashboard/'+username.email+'";alert("You cannot mark previous or upcoming attendance now!");</script>'
+
+@app.route("/ask-doubt", methods=['GET','POST'])
+def askdoubt():
+    return render_template('timetable-show.html',timetable=timetable)
 
 if __name__ == "__main__":
     app.run(debug=True)

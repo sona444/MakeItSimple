@@ -1,0 +1,304 @@
+{% extends "layout/base.html" %}
+
+{% block title %}Advanced EMS{% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}<style>
+nav{
+    background-color:#121131;
+    padding-left:60px;
+    padding-right:60px;
+}
+.navbar-expand-lg .navbar-collapse{
+  justify-content:flex-end !important;
+}
+.navbar-expand-lg .navbar-nav a{
+  color:white !important;
+  font-size:21px;
+}
+.navbar-expand-lg .navbar-nav a:hover{
+  color:white !important;
+}
+</style>{% endblock stylesheets %}
+
+{% block body_class %} landing-page {% endblock body_class %}
+
+{% block content %}
+{% include 'includes/header-with-login.html' %}
+<main>
+    <div class="container course-add-container">
+        <form>
+            <div>
+            <label for="name">Select Subject</label>
+            <select name="subject" id="subject">
+                    {% for i in courses %}
+                    <option value="{{i.name}}">{{i.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+            <label for="day">Day</label>
+                <select name="day" id="day">
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+            </div>
+            <div>
+                <label for="time">Time</label>
+                <select name="time" id="time">
+                    <option value="8:00-9:00">8:00-9:00</option>
+                    <option value="9:00-10:00">9:00-10:00</option>
+                    <option value="10:00-11:00">10:00-11:00</option>
+                    <option value="12:00-13:00">12:00-13:00</option>
+                    <option value="13:00-14:00">13:00-14:00</option>
+                </select>
+            </div>
+            <div style="width:100%; text-align:center;">
+            <button type="submit" class="primary-btn" id="btn-add" >Add new</button>
+            </div>
+        </form>
+    </div>
+    <div class="preview">
+    <h3>Preview Timetable</h3>
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+            <tr>
+                <td>8:00-9:00</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Monday' %}
+                        {% if i.time=='8:00-9:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Tuesday' %}
+                        {% if i.time=='8:00-9:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Wednesday' %}
+                        {% if i.time=='8:00-9:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Thursday' %}
+                        {% if i.time=='8:00-9:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Friday' %}
+                        {% if i.time=='8:00-9:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+            </tr>
+            <tr>
+                <td>9:00-10:00</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Monday' %}
+                        {% if i.time=='9:00-10:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Tuesday' %}
+                        {% if i.time=='9:00-10:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Wednesday' %}
+                        {% if i.time=='9:00-10:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Thursday' %}
+                        {% if i.time=='9:00-10:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Friday' %}
+                        {% if i.time=='9:00-10:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+            </tr>
+            <tr>
+                <td>10:00-11:00</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Monday' %}
+                        {% if i.time=='10:00-11:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Tuesday' %}
+                        {% if i.time=='10:00-11:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Wednesday' %}
+                        {% if i.time=='10:00-11:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Thursday' %}
+                        {% if i.time=='10:00-11:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Friday' %}
+                        {% if i.time=='10:00-11:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+            </tr>
+            <tr>
+                <td>11:00-12:00</td>
+                <td>Break</td>
+                <td>Break</td>
+                <td>Break</td>
+                <td>Break</td>
+                <td>Break</td>
+            </tr>
+            <tr>
+                <td>12:00-13:00</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Monday' %}
+                        {% if i.time=='12:00-13:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Tuesday' %}
+                        {% if i.time=='12:00-13:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Wednesday' %}
+                        {% if i.time=='12:00-13:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Thursday' %}
+                        {% if i.time=='12:00-13:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Friday' %}
+                        {% if i.time=='12:00-13:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+            </tr>
+            <tr>
+                <td>13:00-14:00</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Monday' %}
+                        {% if i.time=='13:00-14:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Tuesday' %}
+                        {% if i.time=='13:00-14:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Wednesday' %}
+                        {% if i.time=='13:00-14:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Thursday' %}
+                        {% if i.time=='13:00-14:00' %}
+                           {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+                <td>{% for i in timetable %}
+                    {% if i.day=='Friday' %}
+                        {% if i.time=='13:00-14:00' %}
+                            {{i.course_name}}
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}</td>
+            </tr>
+        </table>
+    </div>
+</main>
+<script>
+$(document).on('click', '#btn-add', function(e){
+    e.preventDefault();
+    let subject = $('#subject').val();
+    let day = $('#day').val();
+    let time = $('#time').val();
+    jsondata={
+      "subject":subject,
+      "day":day,
+      "time":time,
+    }
+    
+    // disabled the submit button
+    $("#btn-add").prop("disabled", true);
+    $.ajax({
+      type: "POST",
+      data: jsondata,
+      url:"/post-timetable",
+      dataType: "json",
+        complete: function(resp){
+          $("#btn-add").prop("disabled", false); 
+            location.reload();
+            }
+          // enabled the submit button
+        
+      });
+});
+</script>
+{% endblock content %}
